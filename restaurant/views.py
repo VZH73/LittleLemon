@@ -5,7 +5,7 @@ from .models import Menu, Booking
 from .serializers import MenuSerializer, BookingSerializer
 from django.contrib.auth.models import User
 from .serializers import UserSerializer
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 
 # Create your views here.
 def index(request):
@@ -19,10 +19,12 @@ class UserViewSet(ModelViewSet):
 class MenuItemsView(ListCreateAPIView):
     queryset = Menu.objects.all()
     serializer_class = MenuSerializer
+    permission_classes = [AllowAny]
 
 class SingleMenuItemView(RetrieveUpdateDestroyAPIView):
     queryset = Menu.objects.all()
     serializer_class = MenuSerializer
+    permission_classes = [AllowAny]
 
 class BookingViewSet(ModelViewSet):
     permission_classes = [IsAuthenticated]
